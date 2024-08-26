@@ -1,0 +1,20 @@
+version: '3.8'  # Version of Docker Compose file syntax
+
+services:
+  back-end:
+    build:
+      context: ./back-end  # Path to back-end Dockerfile and related files
+      dockerfile: Dockerfile
+    image: softy-pinko-back-end:task4
+    ports:
+      - "5252:5252"  # Mapping host port 5252 to container port 5252
+
+  front-end:
+    build:
+      context: ./front-end  # Path to front-end Dockerfile and related files
+      dockerfile: Dockerfile
+    image: softy-pinko-front-end:task4
+    ports:
+      - "9000:9000"  # Mapping host port 9000 to container port 9000
+    depends_on:
+      - back-end  # Ensures back-end is started before front-end
